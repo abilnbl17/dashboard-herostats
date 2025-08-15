@@ -1,15 +1,31 @@
+/* app/globals.css */
+
+/* Ini adalah cara Tailwind CSS v4 mengimport dirinya */
 @import "tailwindcss";
 
+/* Konfigurasi HeroUI untuk Tailwind CSS v4 */
+/* Pastikan jalur ke file hero.ts ini benar sesuai struktur projectmu */
+@plugin './hero.ts';
+
+/* Ini memberitahu HeroUI di mana komponen mereka berada untuk optimasi */
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+
+/* Ini adalah custom variant dark mode yang direkomendasikan HeroUI */
+@custom-variant dark (&:is(.dark *));
+
+/* Kamu bisa menambahkan CSS kustom kamu di sini di luar direktif Tailwind */
+/* Contoh untuk font yang kamu pakai di layout.tsx */
+body {
+  /* Pastikan variabel font di-define di tailwind.config.ts atau langsung di sini jika tidak pakai variabel theme */
+  /* Contoh: font-family: var(--font-geist-sans); */
+  /* Next.js Geist fonts sudah otomatis diaplikasikan di layout.tsx */
+}
+
+/* Aturan CSS tambahan jika diperlukan */
+/* Misalnya, untuk variabel CSS yang universal */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +35,12 @@
   }
 }
 
+/* Jika kamu ingin menggunakan variabel --background dan --foreground ini
+   di seluruh aplikasi, kamu perlu mengaturnya di global CSS atau melalui Tailwind's theme config.
+   Jika tujuannya hanya untuk mengubah warna body, kamu bisa langsung pakai Tailwind classes
+   atau mengatur CSS variabel seperti ini. */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Untuk font, sudah diatur di layout.tsx dengan kelas geistSans.variable */
 }
