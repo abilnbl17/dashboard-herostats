@@ -11,7 +11,7 @@ export const fetchHeroStats = async (): Promise<HeroStats[]> => {
   }
 };
 
-export const fetchPlayerMathes = async (
+export const fetchPlayerMatches = async (
   accoundId: string
 ): Promise<PlayerMatch[]> => {
   try {
