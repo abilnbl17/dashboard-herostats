@@ -3,7 +3,7 @@ import {
   PlayerHeroSuggestion,
   ProMetaSuggestion,
 } from "@/types/dota";
-import { fetchHeroStats, fetchPlayerMatches } from "../openDotaApi";
+import { fetchHeroStats, fetchPlayerMatches } from "../api/openDotaApi";
 
 // Helper Function
 const calculateWinRate = (pick: number, win: number): number => {

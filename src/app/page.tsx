@@ -1,5 +1,9 @@
 // import Image from "next/image";
 
+import { useEffect, useState } from "react";
+import HeroStatsTable from "./components/HeroStatsTable";
+import axios from "axios";
+
 // export default function Home() {
 //   return (
 //     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
@@ -102,15 +106,36 @@
 //   );
 // }
 
-async function getStats() {
-  const res = await fetch("http://localhost:3000/api/stats");
-  if (!res.ok) {
-    throw new Error("Failed to fetch stats");
-  }
-  return res.json();
+// async function getStats() {
+//   const res = await fetch("http://localhost:3000/api/stats");
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch stats");
+//   }
+//   return res.json();
+// }
+interface TieredHeroData {
+  [tierName: string]: any[];
 }
-
-export default async function Home() {
-  const stats = await getStats();
-  return <>Total Pengguna: {stats.totalUsers}</>;
+export default function Home() {
+  const [heroData, setHeroData] = useState<TieredHeroData | null>(null);
+  // const stats = await getStats();
+  // return <>Total Pengguna: {stats.totalUsers}</>;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/heroes/stats");
+        setHeroData(response.data);
+      } catch (err: any) {
+        console.error("Failed to fetch hero data:", err);
+      } finally {
+        // setLoading(false)
+      }
+    };
+  });
+  return (
+    <div>
+      Test
+      <HeroStatsTable data={heroData[tierName]} />
+    </div>
+  );
 }

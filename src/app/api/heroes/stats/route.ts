@@ -1,12 +1,15 @@
+import { getTieredHeroSuggestions } from "@/lib/services/heroService";
 import { NextResponse } from "next/server";
 
-const dummyStats = {
-  totalUsers: 10000,
-  monthlyRevenue: 75000,
-  dailyVisitors: 32000,
-  conversionRate: 2.5,
-};
-
 export async function GET() {
-  return NextResponse.json(dummyStats);
+  try {
+    const tieredHeroes = await getTieredHeroSuggestions();
+    return NextResponse.json(tieredHeroes);
+  } catch (error) {
+    console.error("Error fetching tiered hero suggestion:", error);
+    return NextResponse.json(
+      { message: "Gagal mengambil data hero" },
+      { status: 500 }
+    );
+  }
 }
