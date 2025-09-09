@@ -131,6 +131,55 @@ export const getSuggestedHeroesForPlayer = async (
     }
   }
 
-  const suggestion: PlayerHeroSuggestion[] = [];
+  const suggestions: PlayerHeroSuggestion[] = [];
   // 1 Sarankan hero yang sering dimainkan dengan winrate bagus oleh pemain
+  const topPlayedHeroes = Object.keys(heroPerformance)
+    .map((heroId) => {
+      const id = Number(heroId);
+      const stats = heroPerformance[id];
+      const winRate = calculateWinRate(stats.games, stats.wins);
+      return { heroId: id, ...stats, winRate };
+    })
+    .filter((h) => h.games >= 5 && h.winRate >= 50)
+    .sort((a, b) => b.winRate - a.winRate || b.games - a.games)
+    .slice(0, 3);
+
+  for (const item of topPlayedHeroes) {
+    const hero = allHeroStats.find((h) => h.id === item.heroId);
+    if (hero) {
+      suggestions.push({
+        hero: hero,
+        reason: `Hero favorit dengan win rate tinggi (${item.winRate.toFixed(
+          2
+        )}%) dari ${item.games} game`,
+        player_win_rate: item.winRate,
+        player_games_played: item.games,
+      });
+    }
+  }
+
+  // 2. Sarankan hero meta yang belum terlalu sering dimainkan pemain tetapi memiliki win rate pro tinggi
+  const metaHeroes = (await getProMetaSuggestions()).map((s) => s.hero);
+  for (const metaHero of metaHeroes) {
+    if (!playedHeroIds.has(metaHero.id) && suggestions.length < 5) {
+      suggestions.push({
+        hero: metaHero,
+        reason: `Hero meta yang kuat dan belum sering anda mainkan.`,
+        player_win_rate: undefined, // pada gemini itu null
+        player_games_played: 0,
+      });
+    }
+  }
+
+  // Pastikan tidak ada duplikasi dan batasi jumlah saran total
+  const finalSuggestions: PlayerHeroSuggestion[] = [];
+  const suggestedHeroIds = new Set<number>();
+  for (const s of suggestions) {
+    if (!suggestedHeroIds.has(s.hero.id)) {
+      finalSuggestions.push(s);
+      suggestedHeroIds.add(s.hero.id);
+    }
+    if (finalSuggestions.length >= 5) break;
+  }
+  return finalSuggestions;
 };
