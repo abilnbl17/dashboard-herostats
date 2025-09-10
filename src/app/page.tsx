@@ -1,7 +1,7 @@
 // import Image from "next/image";
 
 import { useEffect, useState } from "react";
-import HeroStatsTable from "./components/HeroStatsTable";
+// import HeroStatsTable from "./components/HeroStatsTable";
 import axios from "axios";
 
 // export default function Home() {
@@ -135,7 +135,7 @@ export default function Home() {
   return (
     <div>
       Test
-      <HeroStatsTable data={heroData[tierName]} />
+      {/* <HeroStatsTable data={heroData[tierName]} /> */}
     </div>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { HeroStats } from "@/types/dota";
 import {
   Table,
