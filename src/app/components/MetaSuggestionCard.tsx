@@ -1,8 +1,8 @@
 "use client";
 
 import { ProMetaSuggestion } from "@/types/dota";
-import { Badge, Card } from "@heroui/react";
-import Image from "next/image";
+import { Badge, Card, Image } from "@heroui/react";
+// import Image from "next/image";
 
 interface MetaSuggestionCardProps {
   suggestion: ProMetaSuggestion;
@@ -19,8 +19,8 @@ const MetaSuggestionCard = ({ suggestion }: MetaSuggestionCardProps) => {
         <Image
           src={`https://api.opendota.com${hero.icon}`}
           alt={hero.localized_name}
-          layout="fill"
-          objectFit="cover"
+          //   layout="fill"
+          //   objectFit="cover"
           className="opacity-70"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10 flex items-end p-4">

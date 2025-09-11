@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
   HeroStats,
   PlayerHeroSuggestion,
   ProMetaSuggestion,
 } from "@/types/dota";
+import MetaSuggestionCard from "./components/MetaSuggestionCard";
+import PlayerSearchForm from "./components/PlayerSearchForm";
+import PlayerSuggestionsList from "./components/PlayerSuggestionsList";
 
 interface TieredHeroData {
   [tierName: string]: HeroStats[];
@@ -71,9 +76,46 @@ export default function Home() {
     }
   };
   return (
-    <div>
-      Test
-      {/* <HeroStatsTable data={heroData[tierName]} /> */}
-    </div>
+    <main className="container mx-auto p-4 md:p-8">
+      <h1 className="text-4xl font-bold text-center my-8 text-gray-800">
+        Dota 2 Heroes Dashboard
+      </h1>
+      {/* Bagian Saran Meta Pro */}
+      <section className="my-10">
+        <h2 className="text-2xl font-semibold mb-4 text-gray-700">
+          Saran Meta Pro
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {metaSuggestions?.map((suggestion, index) => (
+            <MetaSuggestionCard key={index} suggestion={suggestion} />
+          ))}
+        </div>
+      </section>
+
+      {/* Bagian Saran Hero untuk Pemain */}
+      <section className="my-10">
+        <h2 className="text-2xl font-semibold mb-4 text-gray-700">
+          Saran Hero Untuk Pemain
+        </h2>
+        <PlayerSearchForm
+          onSearch={handlePlayerSearch}
+          isLoading={isPlayerSearchLoading}
+        />
+        {isPlayerSearchLoading && (
+          <p className="mt-4 text-center text-gray-500">
+            Mencari Saran Hero ...
+          </p>
+        )}
+        {playerSearchError && (
+          <p className="mt-4 text-center text-red-500">{playerSearchError}</p>
+        )}
+
+        {playerSuggestions && (
+          <div className="mt-6">
+            <PlayerSuggestionsList suggestions={playerSuggestions} />
+          </div>
+        )}
+      </section>
+    </main>
   );
 }
