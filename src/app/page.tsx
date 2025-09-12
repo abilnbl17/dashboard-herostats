@@ -106,6 +106,7 @@ export default function Home() {
             Mencari Saran Hero ...
           </p>
         )}
+
         {playerSearchError && (
           <p className="mt-4 text-center text-red-500">{playerSearchError}</p>
         )}

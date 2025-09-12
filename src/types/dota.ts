@@ -5,6 +5,7 @@ export interface HeroStats {
   primary_attr: "str" | "agi" | "int";
   attack_type: "Melee" | "Ranged";
   roles: string[];
+  img: any;
   icon: string;
   base_health: number;
   base_mana: number;

@@ -15,9 +15,8 @@ const MetaSuggestionCard = ({ suggestion }: MetaSuggestionCardProps) => {
   return (
     <Card className="overflow-hidden transition-transform transform hover:scale-105">
       <div className="relative h-40 p-0">
-        Ini Header
         <Image
-          src={`https://api.opendota.com${hero.icon}`}
+          src={`${process.env.OPENDOTA_API_BASE_URL}/herostats/img`}
           alt={hero.localized_name}
           //   layout="fill"
           //   objectFit="cover"
