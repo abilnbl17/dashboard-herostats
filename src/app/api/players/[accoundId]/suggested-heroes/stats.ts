@@ -14,3 +14,4 @@ const fetchPlayerSuggestions = async (accountId: string) => {
     return null;
   }
 };
+export default fetchPlayerSuggestions;

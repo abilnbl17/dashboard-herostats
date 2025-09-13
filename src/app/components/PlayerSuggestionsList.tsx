@@ -25,7 +25,7 @@ const PlayerSuggestionsList = ({ suggestions }: PlayerSuggestionsListProps) => {
         >
           <div className="relative h-40">
             <Image
-              src={`https://api.opendota.com${suggestion.hero.icon}`}
+              src={`${process.env.OPENDOTA_BASE_URL}${suggestion.hero.img}`}
               alt={suggestion.hero.localized_name}
               layout="fill"
               objectFit="cover"
