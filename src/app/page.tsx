@@ -61,9 +61,11 @@ export default function Home() {
     setPlayerSearchError(null);
     setPlayerSuggestions(null); // Reset saran sebelumnya
     try {
+      // INI ERROR
       const response = await axios.get(
         `/api/players/${accountId}/suggested-heroes`
       );
+      // DIATAS INI ERROR
       setPlayerSuggestions(response.data);
     } catch (err: any) {
       console.error("Failed to fetch player suggestions:", err);

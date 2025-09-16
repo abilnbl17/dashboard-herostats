@@ -1,4 +1,6 @@
+import { getTieredHeroSuggestions } from "@/lib/services/heroService";
 import axios from "axios";
+import { NextResponse } from "next/server";
 
 const fetchHeroStats = async () => {
   try {
@@ -14,3 +16,16 @@ const fetchHeroStats = async () => {
   }
 };
 export default fetchHeroStats;
+
+export async function GET() {
+  try {
+    const data = await getTieredHeroSuggestions();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}

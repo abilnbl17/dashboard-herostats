@@ -16,7 +16,8 @@ const MetaSuggestionCard = ({ suggestion }: MetaSuggestionCardProps) => {
     <Card className="overflow-hidden transition-transform transform hover:scale-105">
       <div className="relative h-40 p-0">
         <Image
-          src={`${process.env.OPENDOTA_API_BASE_URL}/herostats/img`}
+          // src={`${process.env.OPENDOTA_API_BASE_URL}/herostats/img`}
+          src={`${process.env.DOTA_IMAGE_BASE_URL}${process.env.OPENDOTA_API_BASE_URL}/herostats/img`}
           alt={hero.localized_name}
           //   layout="fill"
           //   objectFit="cover"

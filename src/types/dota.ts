@@ -37,6 +37,9 @@ export interface HeroStats {
   calculated_tier?: string;
   pro_win_rate_percentage?: number;
   pro_pick_rate_percentage?: number;
+
+  // fullImageUrl?: string;
+  // fullIconUrl?: string;
 }
 
 export interface PlayerMatch {

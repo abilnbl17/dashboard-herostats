@@ -16,6 +16,24 @@ const calculatePickRate = (pick: number, totalPicks: number): number => {
   return (pick / totalPicks) * 100;
 };
 
+// Ini adalah image for Hero dashboard
+const DOTA_IMAGE_BASE_URL = process.env.DOTA_IMAGE_BASE_URL;
+
+const addFullImageUrlsToHero = <T extends HeroStats>(hero: T) => {
+  if (!DOTA_IMAGE_BASE_URL) {
+    console.error("Error: DOTA_IMAGE_BASE_URL tidak ditemukan di .env");
+    return hero;
+  }
+  const fullImageUrl = `${DOTA_IMAGE_BASE_URL}${hero.img.replace("?", "")}`;
+  const fullIconUrl = `${DOTA_IMAGE_BASE_URL}${hero.icon.replace("?", "")}`;
+
+  return {
+    ...hero,
+    fullImageUrl,
+    fullIconUrl,
+  };
+};
+
 export const getTieredHeroSuggestions = async (): Promise<
   Record<string, HeroStats[]>
 > => {
@@ -23,17 +41,19 @@ export const getTieredHeroSuggestions = async (): Promise<
 
   const totalProPicks = herostats.reduce((sum, hero) => sum + hero.pro_pick, 0);
 
-  const heroesWithScores = herostats.map((hero) => {
-    const proWinRate = calculateWinRate(hero.pro_pick, hero.pro_win);
-    const proPickRate = calculatePickRate(hero.pro_pick, totalProPicks);
-    const score = proWinRate * 0.7 + proPickRate * 0.3;
-    return {
-      ...hero,
-      pro_win_rate_percentage: proWinRate,
-      pro_pick_rate_percentage: proPickRate,
-      score: score,
-    };
-  });
+  const heroesWithScores = herostats
+    .map((hero) => {
+      const proWinRate = calculateWinRate(hero.pro_pick, hero.pro_win);
+      const proPickRate = calculatePickRate(hero.pro_pick, totalProPicks);
+      const score = proWinRate * 0.7 + proPickRate * 0.3;
+      return {
+        ...hero,
+        pro_win_rate_percentage: proWinRate,
+        pro_pick_rate_percentage: proPickRate,
+        score: score,
+      };
+    })
+    .map(addFullImageUrlsToHero);
 
   heroesWithScores.sort((a, b) => b.score - a.score);
 
@@ -72,7 +92,7 @@ export const getProMetaSuggestions = async (): Promise<ProMetaSuggestion[]> => {
 
       if (proWinRate > 55 && (proPickRate > 2 || proBanRate > 2)) {
         return {
-          hero: hero,
+          hero: addFullImageUrlsToHero(hero),
           pick_rate_percentage: proPickRate,
           win_rate_percentage: proWinRate,
           ban_rate_percentage: proBanRate,
@@ -104,7 +124,9 @@ export const getSuggestedHeroesForPlayer = async (
   const allHeroStats = await fetchHeroStats();
 
   if (playerMatches.length === 0) {
-    const topMetaHeroes = (await getProMetaSuggestions()).map((s) => s.hero);
+    const topMetaHeroes = (await getProMetaSuggestions()).map((s) =>
+      addFullImageUrlsToHero(s.hero)
+    );
     return topMetaHeroes.slice(0, 5).map((hero) => ({
       hero: hero,
       reason:
@@ -148,7 +170,7 @@ export const getSuggestedHeroesForPlayer = async (
     const hero = allHeroStats.find((h) => h.id === item.heroId);
     if (hero) {
       suggestions.push({
-        hero: hero,
+        hero: addFullImageUrlsToHero(hero),
         reason: `Hero favorit dengan win rate tinggi (${item.winRate.toFixed(
           2
         )}%) dari ${item.games} game`,
@@ -163,7 +185,7 @@ export const getSuggestedHeroesForPlayer = async (
   for (const metaHero of metaHeroes) {
     if (!playedHeroIds.has(metaHero.id) && suggestions.length < 5) {
       suggestions.push({
-        hero: metaHero,
+        hero: addFullImageUrlsToHero(metaHero),
         reason: `Hero meta yang kuat dan belum sering anda mainkan.`,
         player_win_rate: undefined, // pada gemini itu null
         player_games_played: 0,
