@@ -14,12 +14,16 @@ const MetaSuggestionCard = ({ suggestion }: MetaSuggestionCardProps) => {
 
   return (
     <Card className="overflow-hidden transition-transform transform hover:scale-105">
-      <div className="relative h-40 p-0">
-        <Image
-          src={hero.fullImageUrl}
-          alt={hero.localized_name}
-          className="opacity-70"
-        />
+      <div className="relative h-45 w-full bg-gray-700 flex items-center justify-center">
+        {hero.fullImageUrl ? (
+          <Image
+            src={hero.fullImageUrl || ""}
+            alt={hero.localized_name}
+            className="w-full h-full object-cover opacity-70"
+          />
+        ) : (
+          <span className="text-white text-sm">Gambar Tidak Tersedia</span>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10 flex items-end p-4">
           {/* dibawah ini ada keterangan menggunakan tag html <CardTitle> tetapi pada HeroUI tidak ada component tersebut */}
           <h3 className="text-white text-xl font-bold">

@@ -27,9 +27,9 @@ const PlayerSuggestionsList: React.FC<PlayerSuggestionsListProps> = ({
           className="overflow-hidden transition-transform transform hover:scale-105"
         >
           <div className="relative h-40">
-            {suggestion.hero.fullImageUrl ? (
+            {suggestion.hero.fullIconUrl ? (
               <Image
-                src={suggestion.hero.fullImageUrl || ""}
+                src={suggestion.hero.fullIconUrl || ""}
                 alt={suggestion.hero.localized_name}
                 fill
                 priority
