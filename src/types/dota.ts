@@ -38,8 +38,8 @@ export interface HeroStats {
   pro_win_rate_percentage?: number;
   pro_pick_rate_percentage?: number;
 
-  // fullImageUrl?: string;
-  // fullIconUrl?: string;
+  fullImageUrl?: string;
+  fullIconUrl?: string;
 }
 
 export interface PlayerMatch {

@@ -16,11 +16,8 @@ const MetaSuggestionCard = ({ suggestion }: MetaSuggestionCardProps) => {
     <Card className="overflow-hidden transition-transform transform hover:scale-105">
       <div className="relative h-40 p-0">
         <Image
-          // src={`${process.env.OPENDOTA_API_BASE_URL}/herostats/img`}
-          src={`${process.env.DOTA_IMAGE_BASE_URL}${process.env.OPENDOTA_API_BASE_URL}/herostats/img`}
+          src={hero.fullImageUrl}
           alt={hero.localized_name}
-          //   layout="fill"
-          //   objectFit="cover"
           className="opacity-70"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10 flex items-end p-4">
@@ -31,8 +28,7 @@ const MetaSuggestionCard = ({ suggestion }: MetaSuggestionCardProps) => {
           {/* Batasnya sampai disni dan saya berikan sebuah tag div biasa  */}
         </div>
       </div>
-      {/* Pada tag ini tidak ada card content adanya card body */}
-      {/* <CardBody className="p"></CardBody> */}
+
       <div className="p-4 text-white bg-gray-800">
         <p className="txt-sm italic mb-3 text-gray-300">{reason}</p>
 

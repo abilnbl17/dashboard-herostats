@@ -27,22 +27,19 @@ const PlayerSuggestionsList: React.FC<PlayerSuggestionsListProps> = ({
           className="overflow-hidden transition-transform transform hover:scale-105"
         >
           <div className="relative h-40">
-            {/* {suggestion.hero.fullImageUrl ? ( */}
-            <Image
-              // src={`${process.env.OPENDOTA_BASE_URL}${suggestion.hero.img}`}
-              src={`${process.env.DOTA_IMAGE_BASE_URL}${suggestion.hero.fullImageUrl}`}
-              alt={suggestion.hero.localized_name}
-              // layout="fill"
-              // objectFit="cover"
-              fill
-              priority
-              className="object-cover opacity-70"
-            />
-            {/* ) : ( */}
-            {/* <div className="bg-gray-700 h-full flex items-center justify-center">
+            {suggestion.hero.fullImageUrl ? (
+              <Image
+                src={suggestion.hero.fullImageUrl || ""}
+                alt={suggestion.hero.localized_name}
+                fill
+                priority
+                className="object-cover opacity-70"
+              />
+            ) : (
+              <div className="bg-gray-700 h-full flex items-center justify-center">
                 <span className="text-white">Gambar Tidak tersedia</span>
-              </div> */}
-            {/* )} */}
+              </div>
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10 flex items-end p-4">
               <h3 className="text-white text-xl font-bold">
                 {suggestion.hero.localized_name}
