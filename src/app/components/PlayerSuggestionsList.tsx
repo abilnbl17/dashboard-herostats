@@ -33,18 +33,20 @@ const PlayerSuggestionsList: React.FC<PlayerSuggestionsListProps> = ({
                 alt={suggestion.hero.localized_name}
                 fill
                 priority
-                className="object-cover opacity-70"
+                className="flex object-cover opacity-70"
               />
             ) : (
               <div className="bg-gray-700 h-full flex items-center justify-center">
                 <span className="text-white">Gambar Tidak tersedia</span>
               </div>
             )}
+            {/* ini adalah nama yang didepan dari gambarnya */}
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10 flex items-end p-4">
-              <h3 className="text-white text-xl font-bold">
-                {suggestion.hero.localized_name}
-              </h3>
+              {/* <h3 className="text-white text-xl font-bold"> */}
+              {/* {suggestion.hero.localized_name} */}
+              {/* </h3> */}
             </div>
+            {/* ini ada close code  */}
           </div>
           <div className="p-4 text-white bg-gray-800">
             <p className="text-sm italic mb-3 text-gray-300">
