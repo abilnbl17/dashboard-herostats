@@ -19,13 +19,23 @@ const calculatePickRate = (pick: number, totalPicks: number): number => {
 // Ini adalah image for Hero dashboard
 const DOTA_IMAGE_BASE_URL = process.env.DOTA_IMAGE_BASE_URL;
 
-const addFullImageUrlsToHero = <T extends HeroStats>(hero: T) => {
+const addFullImageUrlsToHero = <T extends HeroStats>(
+  hero: T
+): T & {
+  fullImageUrl?: string;
+  fullIconUrl?: string;
+} => {
   if (!DOTA_IMAGE_BASE_URL) {
     console.error("Error: DOTA_IMAGE_BASE_URL tidak ditemukan di .env");
     return hero;
   }
-  const fullImageUrl = `${DOTA_IMAGE_BASE_URL}${hero.img.replace("?", "")}`;
-  const fullIconUrl = `${DOTA_IMAGE_BASE_URL}${hero.icon.replace("?", "")}`;
+
+  // Pisahkan URL dari query parameter denagn .split('?')[0]
+  const cleanHeroImgPath = hero.img.split("?")[0];
+  const cleanHeroIconPath = hero.icon.split("?")[0];
+
+  const fullImageUrl = `${DOTA_IMAGE_BASE_URL}${cleanHeroImgPath}`;
+  const fullIconUrl = `${DOTA_IMAGE_BASE_URL}${cleanHeroIconPath}`;
 
   return {
     ...hero,

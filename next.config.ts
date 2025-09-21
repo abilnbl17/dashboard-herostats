@@ -2,7 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [`${process.env.DOTA_IMAGE_BASE_URL}`],
+    // domains: [`cdn.dota2.com`],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.dota2.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 

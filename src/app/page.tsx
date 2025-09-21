@@ -87,7 +87,7 @@ export default function Home() {
         <h2 className="text-2xl font-semibold mb-4 text-gray-700">
           Saran Meta Pro
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {metaSuggestions?.map((suggestion, index) => (
             <MetaSuggestionCard key={index} suggestion={suggestion} />
           ))}

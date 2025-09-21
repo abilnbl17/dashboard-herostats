@@ -14,25 +14,27 @@ const MetaSuggestionCard = ({ suggestion }: MetaSuggestionCardProps) => {
 
   return (
     <Card className="overflow-hidden transition-transform transform hover:scale-105">
-      <div className="relative h-45 w-full bg-gray-700 flex items-center justify-center">
+      <div className="relative h-50 w-full bg-gray-700 flex items-center justify-center">
         {hero.fullImageUrl ? (
           <Image
-            // className="w-full h-full object-contain opacity-0"
             src={hero.fullImageUrl || ""}
             alt={hero.localized_name}
-            width={100}
-            height={100}
+            fill
+            priority
+            // width={300}
+            // height={80}
+            className=" opacity-70"
           />
         ) : (
           <span className="text-white text-sm">Gambar Tidak Tersedia</span>
         )}
-        {/* <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10 flex items-end p-4"> */}
-        {/* dibawah ini ada keterangan menggunakan tag html <CardTitle> tetapi pada HeroUI tidak ada component tersebut */}
-        {/* <h3 className="text-white text-xl font-bold">
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10 flex items-end p-4">
+          {/* dibawah ini ada keterangan menggunakan tag html <CardTitle> tetapi pada HeroUI tidak ada component tersebut */}
+          <h3 className="text-white text-xl font-bold">
             {hero.localized_name}
-          </h3> */}
-        {/* Batasnya sampai disni dan saya berikan sebuah tag div biasa  */}
-        {/* </div> */}
+          </h3>
+          {/* Batasnya sampai disni dan saya berikan sebuah tag div biasa  */}
+        </div>
       </div>
 
       <div className="p-4 text-white bg-gray-800">
