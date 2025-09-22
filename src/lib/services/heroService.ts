@@ -83,7 +83,6 @@ export const getTieredHeroSuggestions = async (): Promise<
 };
 
 // Feature 2: Meta Suggestion Based on Pro Pick + Ban and Winrate
-
 export const getProMetaSuggestions = async (): Promise<ProMetaSuggestion[]> => {
   const heroStats = await fetchHeroStats();
 

@@ -39,7 +39,6 @@ openDotaApiClient.interceptors.response.use(
       if (error.message) {
         console.error("[Axios Response Error] Status:", error.response?.status);
         console.error("[Axios Response Error] Data:", error.response?.data);
-        // console.error("[Axios Response Error] Pesan:", error.message);
       } else if (error.request) {
         console.error(
           "[Axios Response Error] Tidak ada response diterima dari server:",

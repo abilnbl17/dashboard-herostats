@@ -3,9 +3,11 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  context: { params: { accountId: string } }
+  { params }: { params: { accountId: string } }
 ) {
-  const { accountId } = context.params;
+  const accountId = (await params).accountId;
+
+  // const { accountId } = await params;
 
   if (!accountId) {
     return NextResponse.json(
