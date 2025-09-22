@@ -1,7 +1,7 @@
 "use client";
 
 import { ProMetaSuggestion } from "@/types/dota";
-import { Badge, Card } from "@heroui/react";
+import { Card, Code } from "@heroui/react";
 import Image from "next/image";
 
 interface MetaSuggestionCardProps {
@@ -21,8 +21,6 @@ const MetaSuggestionCard = ({ suggestion }: MetaSuggestionCardProps) => {
             alt={hero.localized_name}
             fill
             priority
-            // width={300}
-            // height={80}
             className=" opacity-70"
           />
         ) : (
@@ -41,20 +39,24 @@ const MetaSuggestionCard = ({ suggestion }: MetaSuggestionCardProps) => {
         <p className="txt-sm italic mb-3 text-gray-300">{reason}</p>
 
         <div className="flex flex-wrap justify-between items-center text-sm font-semibold">
-          <Badge color="success" className="mb-2 mr-2">
+          <Code size="sm" className="text-green-600">
             <span className="mr-1">▲</span>
             {win_rate_percentage.toFixed(2)}% Win Rate
-          </Badge>
-          <Badge color="warning" className="mb-2">
+          </Code>
+          <Code size="sm" className="text-amber-500">
             <span className="mr-1">↔</span>
             {pick_rate_percentage.toFixed(2)}% Pick Rate
-          </Badge>
+          </Code>
         </div>
         {suggestion.ban_rate_percentage && (
-          <Badge color="danger" className="mt-2 w-full text-center">
+          <Code
+            size="lg"
+            // color="danger"
+            className="flex justify-center text-red-800"
+          >
             <span className="mr-1">▼</span>
             {suggestion.ban_rate_percentage.toFixed(2)}% Ban Rate
-          </Badge>
+          </Code>
         )}
       </div>
     </Card>
