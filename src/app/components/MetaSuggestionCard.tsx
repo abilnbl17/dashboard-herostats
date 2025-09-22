@@ -49,11 +49,7 @@ const MetaSuggestionCard = ({ suggestion }: MetaSuggestionCardProps) => {
           </Code>
         </div>
         {suggestion.ban_rate_percentage && (
-          <Code
-            size="lg"
-            // color="danger"
-            className="flex justify-center text-red-800"
-          >
+          <Code size="lg" className="flex justify-center text-red-800">
             <span className="mr-1">▼</span>
             {suggestion.ban_rate_percentage.toFixed(2)}% Ban Rate
           </Code>

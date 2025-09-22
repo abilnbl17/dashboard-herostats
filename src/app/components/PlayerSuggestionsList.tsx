@@ -1,7 +1,7 @@
 "use client";
 
 import { PlayerHeroSuggestion } from "@/types/dota";
-import { Badge, Card } from "@heroui/react";
+import { Card, Code } from "@heroui/react";
 import Image from "next/image";
 import React from "react";
 
@@ -20,20 +20,20 @@ const PlayerSuggestionsList: React.FC<PlayerSuggestionsListProps> = ({
     );
   }
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-24">
       {suggestions.map((suggestion, index) => (
         <Card
           key={index}
           className="overflow-hidden transition-transform transform hover:scale-105"
         >
           <div className="relative h-40">
-            {suggestion.hero.fullIconUrl ? (
+            {suggestion.hero.fullImageUrl ? (
               <Image
-                src={suggestion.hero.fullIconUrl || ""}
+                src={suggestion.hero.fullImageUrl || ""}
                 alt={suggestion.hero.localized_name}
                 fill
                 priority
-                className="flex object-cover opacity-70"
+                className="opacity-70"
               />
             ) : (
               <div className="bg-gray-700 h-full flex items-center justify-center">
@@ -42,9 +42,9 @@ const PlayerSuggestionsList: React.FC<PlayerSuggestionsListProps> = ({
             )}
             {/* ini adalah nama yang didepan dari gambarnya */}
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10 flex items-end p-4">
-              {/* <h3 className="text-white text-xl font-bold"> */}
-              {/* {suggestion.hero.localized_name} */}
-              {/* </h3> */}
+              <h3 className="text-white text-xl font-bold">
+                {suggestion.hero.localized_name}
+              </h3>
             </div>
             {/* ini ada close code  */}
           </div>
@@ -55,14 +55,14 @@ const PlayerSuggestionsList: React.FC<PlayerSuggestionsListProps> = ({
             {suggestion.player_win_rate !== null &&
               suggestion.player_win_rate !== undefined && (
                 <div className="flex flex-warp justify-between items-center text-sm font-semibold">
-                  <Badge color="success" className="mb-2 mr-2">
+                  <Code size="sm" className="text-green-600">
                     <span className="mr-1">▲</span>
                     {suggestion.player_win_rate.toFixed(2)}% Win Rate
-                  </Badge>
-                  <Badge color="warning" className="mb-2">
+                  </Code>
+                  <Code size="sm" className="text-amber-500">
                     <span className="mr-1">▶</span>
                     {suggestion.player_games_played} Games
-                  </Badge>
+                  </Code>
                 </div>
               )}
           </div>

@@ -12,19 +12,19 @@ export const fetchHeroStats = async (): Promise<HeroStats[]> => {
 };
 
 export const fetchPlayerMatches = async (
-  accoundId: string
+  accountId: string
 ): Promise<PlayerMatch[]> => {
   try {
     const response = await openDotaApiClient.get<PlayerMatch[]>(
-      `/players/${accoundId}/matches`
+      `/players/${accountId}/matches`
     );
     return response.data;
   } catch (error) {
     console.error(
-      `Error fetching player matches for accound ID ${accoundId}:`,
+      `Error fetching player matches for account ID ${accountId}:`,
       error
     );
-    throw new Error(`Gagal mengambil data pertandigan pemain ${accoundId}.`);
+    throw new Error(`Gagal mengambil data pertandigan pemain ${accountId}.`);
   }
 };
 
