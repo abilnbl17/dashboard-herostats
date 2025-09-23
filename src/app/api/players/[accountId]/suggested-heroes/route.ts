@@ -7,8 +7,6 @@ export async function GET(
 ) {
   const accountId = (await params).accountId;
 
-  // const { accountId } = await params;
-
   if (!accountId) {
     return NextResponse.json(
       { message: "Parameter accountId diperlukan." },

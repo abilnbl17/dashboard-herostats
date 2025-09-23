@@ -125,14 +125,21 @@ export const getProMetaSuggestions = async (): Promise<ProMetaSuggestion[]> => {
 };
 
 // Fitur 3: Automated Hero Suggestion GIven a Player Account ID
-
 export const getSuggestedHeroesForPlayer = async (
   accountId: string
 ): Promise<PlayerHeroSuggestion[]> => {
+  // Debugging
+  console.log(`Menganalisis pemain dengan ID: ${accountId}`);
   const playerMatches = await fetchPlayerMatches(accountId);
+  // Debugging
+  console.log(
+    `Jumlah pertandingan yang ditemukan untuk ${accountId}: ${playerMatches.length}`
+  );
   const allHeroStats = await fetchHeroStats();
 
   if (playerMatches.length === 0) {
+    // Debugging
+    console.log("Tidak ada riwayat pertandingan, menggunakan hero meta");
     const topMetaHeroes = (await getProMetaSuggestions()).map((s) =>
       addFullImageUrlsToHero(s.hero)
     );

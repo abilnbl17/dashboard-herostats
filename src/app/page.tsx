@@ -65,6 +65,7 @@ export default function Home() {
       const response = await axios.get(
         `/api/players/${accountId}/suggested-heroes`
       );
+      // console.log(response);
       // DIATAS INI ERROR
       setPlayerSuggestions(response.data);
     } catch (err: any) {

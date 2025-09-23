@@ -1,18 +1,18 @@
 import axios from "axios";
 
-const OPENDOTA_API_BASE_URL = process.env.OPENDOTA_API_BASE_URL;
+// const OPENDOTA_API_BASE_URL = process.env.OPENDOTA_API_BASE_URL;
 
-if (!OPENDOTA_API_BASE_URL) {
+if (!process.env.OPENDOTA_API_BASE_URL) {
   console.error(
     "Error: Variabel lingkungan OPENDOTA_API_BASE_URL tidak didefinisikan."
   );
   console.error(
-    "Pastikan anda memiliki file .env di root proyek dengan OPENDOTA_API_BASEURL = http://api.opendota.com/api"
+    "Pastikan anda memiliki file .env di root proyek dengan OPENDOTA_API_BASEURL"
   );
 }
 
 const openDotaApiClient = axios.create({
-  baseURL: OPENDOTA_API_BASE_URL,
+  baseURL: process.env.OPENDOTA_API_BASE_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
